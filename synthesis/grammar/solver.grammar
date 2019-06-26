@@ -1,0 +1,9 @@
+using semantics Solver.Semantics;
+
+language Solver;
+
+@input string v;
+
+@start string P := Transform(f, v) = Map(\x: char => f, v);
+
+char f := A(x) | Ident(x);
