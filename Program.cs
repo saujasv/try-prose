@@ -7,6 +7,7 @@ using Microsoft.ProgramSynthesis;
 using Microsoft.ProgramSynthesis.AST;
 using Microsoft.ProgramSynthesis.Compiler;
 using Microsoft.ProgramSynthesis.Learning;
+using Microsoft.ProgramSynthesis.Learning.Strategies;
 using Microsoft.ProgramSynthesis.Specifications;
 using Microsoft.ProgramSynthesis.VersionSpace;
 
@@ -92,11 +93,13 @@ namespace Solver
                             "Invalid example format. Please try again. input and out should be between quotes");
 
                     string inputExample = input.Substring(startFirstExample, endFirstExample - startFirstExample - 1);
+                    char[] inputExampleArray = inputExample.ToCharArray();
                     string outputExample =
                         input.Substring(startSecondExample, endSecondExample - startSecondExample - 1);
+                    char[] outputExampleArray = outputExample.ToCharArray();
 
-                    State inputState = State.CreateForExecution(grammar.InputSymbol, inputExample);
-                    Examples.Add(inputState, outputExample);
+                    State inputState = State.CreateForExecution(grammar.InputSymbol, inputExampleArray);
+                    Examples.Add(inputState, outputExampleArray);
                 }
             }
             catch (Exception)
@@ -153,6 +156,10 @@ namespace Solver
 
         public static SynthesisEngine ConfigureSynthesis()
         {
+            var witnessFunctions = new WitnessFunctions(grammar);
+            var deductiveSynthesis = new DeductiveSynthesis(witnessFunctions);
+            var synthesisExtrategies = new ISynthesisStrategy[] {deductiveSynthesis};
+    var synthesisConfig = new SynthesisEngine.Config {Strategies = synthesisExtrategies};
             var prose = new SynthesisEngine(grammar);
             return prose;
         }

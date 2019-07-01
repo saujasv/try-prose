@@ -1,9 +1,16 @@
 using semantics Solver.Semantics;
+using learners Solver.WitnessFunctions;
 
 language Solver;
 
-@input string v;
+@input char[] v;
 
-@start string P := Transform(f, v) = Map(\x: char => f, v);
+int[] IndexList := GetIndices(v);
 
-char f := A(x) | Ident(x);
+@start char[] P := Transform(f, IndexList) = Map((\i: int) => f, IndexList);
+
+Func<char[], int, bool> pred := IsChar(c) | True();
+
+char f := Censor(i, v, pred) | Ident(i, v);
+
+@values[CharGen] char c;
