@@ -9,8 +9,8 @@ int[] IndexList := GetIndices(v);
 
 @start char[] P := Transform(f, IndexList) = Map((\i: int) => f, IndexList);
 
-Func<char[], int, bool> pred := IsChar(c) | True();
+Func<char[], int, bool> cond := IsA() | IsB() | IsC() | IsD() | IsE() | IsF() | IsG() | IsH() | IsI() | IsJ() | IsK() | IsL() | IsM() | IsN() | IsO() | IsP() | IsQ() | IsR() | IsS() | IsT() | IsU() | IsV() | IsW() | IsX() | IsY() | IsZ() | True() | False();
 
-char f := Censor(i, v, pred) | Ident(i, v);
+Func<char[], int, bool> pred := cond | OR(cond, cond);
 
-@values[CharGen] char c;
+char f := ToStar(i, v, pred) | ToA(i, v, pred) | ToB(i, v, pred) | ToC(i, v, pred) | ToD(i, v, pred) | ToE(i, v, pred) | ToF(i, v, pred) | ToG(i, v, pred) | ToH(i, v, pred) | ToI(i, v, pred) | ToJ(i, v, pred) | ToK(i, v, pred) | ToL(i, v, pred) | ToM(i, v, pred) | ToN(i, v, pred) | ToO(i, v, pred) | ToP(i, v, pred) | ToQ(i, v, pred) | ToR(i, v, pred) | ToS(i, v, pred) | ToT(i, v, pred) | ToU(i, v, pred) | ToV(i, v, pred) | ToW(i, v, pred) | ToX(i, v, pred) | ToY(i, v, pred) | ToZ(i, v, pred) | Ident(i, v);
